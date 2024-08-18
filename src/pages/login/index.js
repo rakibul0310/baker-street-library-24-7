@@ -1,7 +1,29 @@
+import Spinner from "@/components/Spinner";
+import { useLoginMutation } from "@/services/authService";
+import { useRouter } from "next/router";
 import React from "react";
 
 const Login = () => {
   const [showPassword, setShowPassword] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [login, { data, error, isLoading, isSuccess }] = useLoginMutation();
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      // save token to local storage
+      localStorage.setItem("token", data?.data?.token);
+      // redirect to dashboard using next router
+      router.push("/dashboard");
+    }
+  }, [isSuccess, error]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login({ email, password });
+  };
+
   return (
     <div className="p-5 border shadow-md">
       <div className="flex flex-col justify-center items-center mb-6">
@@ -15,7 +37,10 @@ const Login = () => {
         </h1>
       </div>
       <div className="flex py-2">
-        <form className="flex flex-col justify-center items-start">
+        <form
+          className="flex flex-col justify-center items-start"
+          onSubmit={handleSubmit}
+        >
           <div className="flex flex-col justify-center items-start">
             <label htmlFor="email">
               Email<span className="text-red-500">*</span>
@@ -26,9 +51,12 @@ const Login = () => {
               name="email"
               id="email"
               placeholder="example@mail.com"
+              onChange={(e) => setEmail(e.target.value)}
             />
             {/* error message */}
-            <span className="text-red-500">Email is required!</span>
+            {error && (
+              <span className="text-red-500">{error?.data?.message}</span>
+            )}
           </div>
           <div className="flex flex-col justify-center items-start">
             <label htmlFor="password">
@@ -41,6 +69,7 @@ const Login = () => {
                 placeholder="Password"
                 name="password"
                 id="password"
+                onChange={(e) => setPassword(e.target.value)}
               />
               <div
                 className="flex justify-center items-center py-2 absolute right-[4px] top-[3px]"
@@ -55,12 +84,17 @@ const Login = () => {
             </div>
           </div>
           <div className="flex justify-end items-center w-[100%] my-4 px-2">
-            <button
-              className="px-8 py-2 bg-green-400 text-gray-700 font-medium rounded-md hover:bg-green-500 hover:text-white transition-all duration-300"
-              type="submit"
-            >
-              Login
-            </button>
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <button
+                className="px-8 py-2 bg-green-400 text-gray-700 font-medium rounded-md hover:bg-green-500 hover:text-white transition-all duration-300"
+                type="submit"
+                disabled={isLoading}
+              >
+                Login
+              </button>
+            )}
           </div>
         </form>
       </div>

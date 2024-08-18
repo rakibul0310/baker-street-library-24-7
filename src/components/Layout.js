@@ -1,8 +1,25 @@
 import Head from "next/head";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import LoadingScreen from "./LoadingScreen";
+import { useLoggedInUserQuery } from "@/services/authService";
+import React from "react";
+import { useRouter } from "next/router";
 
 export default function Layout({ children }) {
+  // call loggedin user RTK query
+  const { data, error, isLoading } = useLoggedInUserQuery();
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (error) {
+      localStorage.removeItem("token");
+      router.push("/login");
+    }
+  }, [error]);
+
+  if (isLoading) return <LoadingScreen />;
+
   return (
     <>
       <Head>
