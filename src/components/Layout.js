@@ -14,7 +14,7 @@ export default function Layout({ children }) {
   React.useEffect(() => {
     if (error) {
       localStorage.removeItem("token");
-      router.push("/login");
+      router.push("/");
     }
   }, [error]);
 

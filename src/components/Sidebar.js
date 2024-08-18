@@ -9,12 +9,14 @@ const Sidebar = ({ fromLayout, showSidebar }) => {
         fromLayout ? "hidden lg:block" : ""
       } ${!fromLayout && showSidebar && "left-0"} ${
         !fromLayout && !showSidebar && "left-[-60%]"
-      } transition-all duration-300`}
+      } transition-all duration-300 z-[51]`}
     >
       <ul className="text-gray-200 px-[2rem] py-[2rem] text-xl">
         <li className="cursor-pointer my-2 p-1 rounded-md hover:bg-gray-500">
-          <i class="ri-dashboard-3-fill text-[1.5rem]"></i>{" "}
-          <span className="ms-2">Dashboard</span>
+          <Link href="/dashboard">
+            <i class="ri-dashboard-3-fill text-[1.5rem]"></i>{" "}
+            <span className="ms-2">Dashboard</span>
+          </Link>
         </li>
         <li>
           <span
@@ -36,8 +38,10 @@ const Sidebar = ({ fromLayout, showSidebar }) => {
               </Link>
             </li>
             <li className="cursor-pointer my-2  p-1 rounded-md hover:bg-gray-500 text-lg">
-              <i class="ri-book-open-fill text-[1.2rem]"></i>
-              <span className="ms-2">Add Book</span>
+              <Link href="/dashboard/add-book">
+                <i class="ri-book-open-fill text-[1.2rem]"></i>
+                <span className="ms-2">Add Book</span>
+              </Link>
             </li>
           </ul>
         </li>

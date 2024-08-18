@@ -1,6 +1,7 @@
 import React from "react";
 
 const BookCard = ({
+  cover,
   title,
   author,
   owner,
@@ -9,8 +10,12 @@ const BookCard = ({
   updated_at,
 }) => {
   return (
-    <div>
-      <img src="" alt="Book Cover" />
+    <div className="flex justify-between items-center bg-gray-200 shadow-md p-1 rounded-md">
+      <img
+        src={cover ? cover : "/book.png"}
+        className="w-[150px]"
+        alt="Book Cover"
+      />
       <div>
         <h1>
           Book Title: <span>{title}</span>
