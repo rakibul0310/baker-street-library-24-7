@@ -6,7 +6,7 @@ const Header = () => {
   const [showSidebar, setShowSidebar] = React.useState(false);
   return (
     <>
-      <div className="bg-gray-600 flex justify-between px-[4%] py-[10px] fixed top-0 left-0 w-[100%]">
+      <div className="bg-gray-600 flex justify-between px-[4%] py-[10px] fixed top-0 left-0 w-[100%] z-[51]">
         <div>
           <i
             class="ri-menu-line text-3xl text-gray-300 hover:text-gray-200 cursor-pointer"
