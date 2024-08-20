@@ -13,15 +13,17 @@ function DropzoneImage({ setImage, image }) {
 
   return (
     <div
-      className="w-[100%] bg-gray-200 h-[200px] border border-gray-300 flex flex-col justify-center items-center"
+      className="w-[100%] bg-gray-200 h-[200px] border border-gray-300 flex flex-col justify-center items-center cursor-pointer"
       {...getRootProps()}
     >
-      <i class="ri-download-cloud-2-line text-6xl"></i>
+      <i className="ri-download-cloud-2-line text-6xl text-gray-400"></i>
       <input {...getInputProps()} />
       {isDragActive ? (
-        <p>Drop the files here ...</p>
+        <p className="text-gray-400">Drop the files here ...</p>
       ) : (
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <p className="text-gray-400">
+          Drag 'n' drop some files here, or click to select files
+        </p>
       )}
       <div className="w-[30%] h-[30%]"></div>
     </div>

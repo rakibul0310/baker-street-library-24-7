@@ -29,6 +29,16 @@ export const widgetService = createApi({
         url: "/user/total-members",
       }),
     }),
+    allMembers: builder.query({
+      query: () => ({
+        url: "/user/all-members",
+      }),
+    }),
+    allAuthor: builder.query({
+      query: () => ({
+        url: "/user/all-author",
+      }),
+    }),
   }),
 });
 
@@ -36,4 +46,6 @@ export const {
   useTotalBooksQuery,
   useTotalAuthorsQuery,
   useTotalMembersQuery,
+  useAllMembersQuery,
+  useAllAuthorQuery,
 } = widgetService;

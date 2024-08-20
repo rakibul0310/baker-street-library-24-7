@@ -19,6 +19,14 @@ const Login = () => {
     }
   }, [isSuccess, error]);
 
+  React.useEffect(() => {
+    // check if user is already logged in
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.push("/dashboard");
+    }
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     login({ email, password });
