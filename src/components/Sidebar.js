@@ -5,10 +5,10 @@ const Sidebar = ({ fromLayout, showSidebar }) => {
   const [collapsed, setCollapsed] = React.useState(false);
   return (
     <div
-      className={`w-[60%] lg:w-[20%] bg-gray-600 h-[100vh] fixed top-[4rem] ${
+      className={`w-[80%] lg:w-[20%] bg-gray-600 h-[100vh] fixed top-[4rem] ${
         fromLayout ? "hidden lg:block" : ""
       } ${!fromLayout && showSidebar && "left-0"} ${
-        !fromLayout && !showSidebar && "left-[-60%]"
+        !fromLayout && !showSidebar && "left-[-80%]"
       } transition-all duration-300 z-[51]`}
     >
       <ul className="text-gray-200 px-[2rem] py-[2rem] text-xl">

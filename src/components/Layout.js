@@ -11,6 +11,8 @@ export default function Layout({ children }) {
   const { data, error, isLoading } = useLoggedInUserQuery();
   const router = useRouter();
 
+  const [showSidebar, setShowSidebar] = React.useState(false);
+
   React.useEffect(() => {
     if (error) {
       localStorage.removeItem("token");
@@ -27,9 +29,19 @@ export default function Layout({ children }) {
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       </Head>
 
-      <div className="flex max-w-[100%] overflow-hidden flex-col">
-        <Header />
+      <div
+        className={`flex max-w-[100%] overflow-hidden flex-col ${
+          showSidebar ? "h-[100vh]" : "h-auto"
+        }`}
+      >
+        <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
         <div>
+          <div
+            className={`z-[50] w-[100%] h-[100vh] bg-black opacity-[0.8] absolute top-0 left-0 ${
+              !showSidebar ? "hidden" : "block"
+            }`}
+            onClick={() => setShowSidebar(false)}
+          ></div>
           <Sidebar fromLayout={true} />
           <main className="ms-0 lg:ms-[290px] mt-[70px]">{children}</main>
         </div>

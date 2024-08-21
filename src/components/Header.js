@@ -1,12 +1,18 @@
 import React from "react";
 import Sidebar from "./Sidebar";
+import { useRouter } from "next/router";
 
-const Header = () => {
+const Header = ({ showSidebar, setShowSidebar }) => {
+  const router = useRouter();
   const [showUserMenu, setShowUserMenu] = React.useState(false);
-  const [showSidebar, setShowSidebar] = React.useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    router.push("/");
+  };
   return (
     <>
-      <div className="bg-gray-600 flex justify-between px-[4%] py-[10px] fixed top-0 left-0 w-[100%] z-[51]">
+      <div className="bg-gray-600 flex justify-between px-[4%] pt-[30px] md:pt-[10px] pb-[10px] fixed top-0 left-0 w-[100%] z-[51]">
         <div>
           <i
             class="ri-menu-line text-3xl text-gray-300 hover:text-gray-200 cursor-pointer"
@@ -26,7 +32,10 @@ const Header = () => {
             <li className="my-1 hover:bg-gray-400 cursor-pointer p-2 rounded-md text-center">
               Profile
             </li>
-            <li className="my-1 hover:bg-gray-400 cursor-pointer p-2 rounded-md text-center">
+            <li
+              className="my-1 hover:bg-gray-400 cursor-pointer p-2 rounded-md text-center"
+              onClick={handleLogout}
+            >
               Logout
             </li>
           </ul>
