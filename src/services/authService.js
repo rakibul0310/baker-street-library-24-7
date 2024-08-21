@@ -14,6 +14,11 @@ export const authService = createApi({
     },
   }),
   endpoints: (builder) => ({
+    healthCheck: builder.query({
+      query: () => ({
+        url: "/",
+      }),
+    }),
     login: builder.mutation({
       query: (body) => ({
         url: "/auth/login",
@@ -34,5 +39,9 @@ export const authService = createApi({
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useLoggedInUserQuery } =
-  authService;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useLoggedInUserQuery,
+  useHealthCheckQuery,
+} = authService;

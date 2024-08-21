@@ -1,7 +1,9 @@
 import Head from "next/head";
 import Login from "./login";
+import { useHealthCheckQuery } from "@/services/authService";
 
 export default function Home() {
+  const { data, error, isLoading } = useHealthCheckQuery();
   return (
     <>
       <Head>
