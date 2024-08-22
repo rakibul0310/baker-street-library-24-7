@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import LoadingScreen from "@/components/LoadingScreen";
 import InfoCard from "@/components/widgets/InfoCard";
+import { useHealthCheckQuery } from "@/services/authService";
 import {
   useTotalAuthorsQuery,
   useTotalBooksQuery,
@@ -9,6 +10,7 @@ import {
 import React from "react";
 
 const Dashboard = () => {
+  const { data: healthCheck } = useHealthCheckQuery();
   const { data: totalBooks, isLoading: totalBooksIsLoading } =
     useTotalBooksQuery();
   const { data: totalAuthors, isLoading: totalAuthorsIsLoading } =
