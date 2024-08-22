@@ -15,11 +15,11 @@ const InfoCard = ({ title, icon, data, bgColor }) => {
             : "bg-red-300"
         }`}
       >
-        <div>
-          <h1 className="text-xl font-bold">{title}</h1>
-          <h1 className="px-3 py-1 text-white bg-blue-500 rounded">{icon}</h1>
+        <div className="flex flex-row-reverse justify-center items-center">
+          <h1 className="text-2xl font-bold">{title}</h1>
+          <h1 className="px-3 py-1 text-white rounded text-6xl">{icon}</h1>
         </div>
-        <div>
+        <div className="text-5xl font-extrabold">
           <CountUp end={data} duration={5} />
         </div>
       </div>

@@ -1,26 +1,43 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
 const Sidebar = ({ fromLayout, showSidebar }) => {
   const [collapsed, setCollapsed] = React.useState(false);
+  const router = useRouter();
+  const { pathname } = router;
+
+  React.useEffect(() => {
+    if (
+      pathname.includes("/dashboard/books") ||
+      pathname.includes("/dashboard/add-book")
+    ) {
+      setCollapsed(true);
+    }
+  }, [pathname]);
+
   return (
     <div
-      className={`w-[80%] lg:w-[20%] bg-gray-600 h-[100vh] fixed top-[4rem] ${
+      className={`w-[80%] lg:w-[20%] bg-[#1e7872] h-[100vh] fixed top-[4rem] ${
         fromLayout ? "hidden lg:block" : ""
       } ${!fromLayout && showSidebar && "left-0"} ${
         !fromLayout && !showSidebar && "left-[-80%]"
-      } transition-all duration-300 z-[51]`}
+      } transition-all duration-300 z-[51] shadow-md`}
     >
       <ul className="text-gray-200 px-[2rem] py-[2rem] text-xl">
-        <li className="cursor-pointer my-2 p-1 rounded-md hover:bg-gray-500">
-          <Link href="/dashboard">
+        <Link href="/dashboard">
+          <li
+            className={`cursor-pointer my-2 p-1 rounded-md hover:bg-[#f3af4a] text-white ${
+              pathname === "/dashboard" ? "bg-[#f3af4a]" : ""
+            }`}
+          >
             <i class="ri-dashboard-3-fill text-[1.5rem]"></i>{" "}
             <span className="ms-2">Dashboard</span>
-          </Link>
-        </li>
+          </li>
+        </Link>
         <li>
           <span
-            className="cursor-pointer my-2 p-1 rounded-md hover:bg-gray-500 block"
+            className="cursor-pointer my-2 p-1 rounded-md hover:bg-[#f3af4a] text-white block"
             onClick={() => setCollapsed(!collapsed)}
           >
             <i class="ri-book-fill text-[1.5rem]"></i>
@@ -28,21 +45,29 @@ const Sidebar = ({ fromLayout, showSidebar }) => {
           </span>
           <ul
             className={`block overflow-hidden ${
-              collapsed ? "ms-[3rem]" : "h-[0px]"
+              collapsed ? "ms-[1.6rem]" : "h-[0px]"
             }`}
           >
-            <li className="cursor-pointer my-2  p-1 rounded-md hover:bg-gray-500 text-lg">
-              <Link href="/dashboard/books">
+            <Link href="/dashboard/books">
+              <li
+                className={`cursor-pointer my-2 p-1 rounded-md hover:bg-[#f3af4a] text-white text-lg ${
+                  pathname === "/dashboard/books" ? "bg-[#f3af4a]" : ""
+                }`}
+              >
                 <i class="ri-book-shelf-fill text-[1.2rem]"></i>
                 <span className="ms-2">All Books</span>
-              </Link>
-            </li>
-            <li className="cursor-pointer my-2  p-1 rounded-md hover:bg-gray-500 text-lg">
-              <Link href="/dashboard/add-book">
+              </li>
+            </Link>
+            <Link href="/dashboard/add-book">
+              <li
+                className={`cursor-pointer my-2  p-1 rounded-md hover:bg-[#f3af4a] text-white text-lg ${
+                  pathname === "/dashboard/add-book" ? "bg-[#f3af4a]" : ""
+                }`}
+              >
                 <i class="ri-book-open-fill text-[1.2rem]"></i>
                 <span className="ms-2">Add Book</span>
-              </Link>
-            </li>
+              </li>
+            </Link>
           </ul>
         </li>
       </ul>
